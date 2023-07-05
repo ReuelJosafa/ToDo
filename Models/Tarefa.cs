@@ -28,7 +28,7 @@ namespace ToDo
 
         public Responsavel GetResponsavel => _responsavel;
         public Solicitante GetSolicitante => _solicitante;
-        public Status GetStatus() { return _status; }
+        public Status GetStatus => _status;
         public string GetDataSolicitacao => _dataSolicitacao.ToShortDateString();
         public string GetDataInicio => _dataInicio.ToShortDateString();
         public string GetDataFim => _dataFim.ToShortDateString();

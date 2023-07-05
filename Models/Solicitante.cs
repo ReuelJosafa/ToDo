@@ -16,6 +16,7 @@ namespace ToDo
             string descricao = Console.ReadLine();
             Tarefa tarefa = new Tarefa(titulo, descricao, this);
             _historicoTarefasSolicitadas.AddTarefa(tarefa);
+            Console.WriteLine("\nTarefa solicitada com sucesso!\n");
             return tarefa;
         }
 

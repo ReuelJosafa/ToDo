@@ -58,5 +58,17 @@ namespace ToDo
 
         }
 
+        public void ExibirTarefas()
+        {
+            Console.WriteLine("Tarefas da lista: " + Titulo + "\n");
+            Console.WriteLine("--------------------------------------Listagem Tarefas--------------------------------------");
+            for (int index = 0; index < _tarefas.Count; index++)
+            {
+                Console.WriteLine(index + 1 + " - " + _tarefas[index].Titulo);
+            }
+            Console.WriteLine("------------------------------------Fim Listagem Tarefas------------------------------------");
+
+        }
+
     }
 }
