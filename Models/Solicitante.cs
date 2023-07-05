@@ -1,9 +1,9 @@
 namespace ToDo
 {
-    public class Solicitante : Pessoa
+    public class Solicitante : Pessoa, IAcaoTarefa
     {
         private ListaTarefas _historicoTarefasSolicitadas;
-        public Solicitante(string nome, string email, string telefone) : base(nome, email, telefone)
+        public Solicitante(string nome, string email) : base(nome, email)
         {
             _historicoTarefasSolicitadas = new ListaTarefas("histórico tarefas solicitadas do(a) " + nome);
         }
@@ -20,7 +20,7 @@ namespace ToDo
             return tarefa;
         }
 
-        public override void ExibirTarefas()
+        public void ExibirTarefas()
         {
             Console.WriteLine("Tarefas do(a) ");
             foreach (var tarefa in _historicoTarefasSolicitadas.GetTarefas)

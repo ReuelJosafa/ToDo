@@ -4,15 +4,13 @@ namespace ToDo
     {
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string Telefone { get; set; }
-        public Pessoa(string nome, string email, string telefone)
+        public Pessoa(string nome, string email)
         {
             Nome = nome;
             Email = email;
-            Telefone = telefone;
         }
 
         
-        public virtual void ExibirTarefas() => throw new Exception("O método 'ExibirTarefas' não foi implementado na subclasse.");
+        // public virtual void ExibirTarefas() => throw new Exception("O método 'ExibirTarefas' não foi implementado na subclasse.");
     }
 }

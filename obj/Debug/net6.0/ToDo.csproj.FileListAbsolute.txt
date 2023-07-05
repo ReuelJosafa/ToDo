@@ -28,3 +28,5 @@ C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\obj\Debug\net6.0\refint\
 C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\obj\Debug\net6.0\ToDo.pdb
 C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\obj\Debug\net6.0\ToDo.genruntimeconfig.cache
 C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\obj\Debug\net6.0\ref\ToDo.dll
+C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\kulib\Documents\tads_3\projetos_c#\GitHub\ToDo\obj\Debug\net6.0\ToDo.csproj.CopyComplete

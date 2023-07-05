@@ -47,16 +47,8 @@ namespace ToDo
 
         }
 
-        /* public Tarefa getTarefaBy(Pessoa pessoa)
-        {
-            return _tarefas.Find(tr => tr.Responsavel == pessoa || tr.Solicitante == pessoa);
-
-        } */
-
-        public void getTarefasSemResponsavel()
-        {
-
-        }
+        public List<Tarefa> getTarefasSemResponsavel() => _tarefas.Where(tarefa => tarefa.GetResponsavel == null).ToList();
+        public List<Tarefa> getTarefasComResponsavel() => _tarefas.Where(tarefa => tarefa.GetResponsavel != null).ToList();
 
         public void ExibirTarefas()
         {

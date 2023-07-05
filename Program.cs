@@ -4,30 +4,29 @@ class Program
 {
     static void Main()
     {
-        List<ListaTarefas> listaListaTarefas = new List<ListaTarefas> { };
         List<Solicitante> solicitantes = new List<Solicitante> { };
         List<Responsavel> responsaveis = new List<Responsavel> { };
+        try
+        {
+            // Console.WriteLine(ListaTarefaService.ObterListaTarefas());
+            solicitantes.AddRange(PessoasService.ObterSolicitantes());
+            responsaveis.AddRange(PessoasService.ObterResponsaveis());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        List<ListaTarefas> listaListaTarefas = new List<ListaTarefas> { };
+
 
         // Cria a 1º Lista de Tarefas
         ListaTarefas listaTarefas = new ListaTarefas("Tarefas Suporte");
         listaListaTarefas.Add(listaTarefas);
 
-
-        Responsavel responsavel = new Responsavel("João", "joao@gmail.com", "42343567");
-        responsaveis.Add(responsavel);
-        Solicitante solicitante = new Solicitante("Maria", "maria@gmail.com", "42765487654");
-        solicitantes.Add(solicitante);
-        // Tarefa t2 = solicitante.SolicitarTarefa();
-
-        // listaTarefas.AddTarefa(t1);
-
-        // responsavel.IniciarTarefa(t1);
-        // responsavel.FinalizarTarefa(t1);
-
-        Console.Write("Sistema de Gerenciamento de Tarefas - ToDo\n\n");
+        Console.Write("\n\nSistema de Gerenciamento de Tarefas - ToDo\n\n");
 
         int opcaoSelecionada = 0;
-        while (opcaoSelecionada >= 0 && opcaoSelecionada < 8)
+        while (opcaoSelecionada >= 0 && opcaoSelecionada <= 8)
         {
             Console.Write(
                 "0 - Limpar console\n" +
@@ -35,14 +34,16 @@ class Program
                 "2 - Exibir ListaTarefas\n" +
                 "3 - Solicitar Tarefa\n" +
                 "4 - Exibir Tarefas\n" +
-                "5 - Cadastrar Responsavel\n" +
-                "6 - Cadastrar Solicitante\n" +
-                "7 - Exibir Pessoas Cadastradas\n" +
-                "8 - Sair\n\n" +
+                "5 - Cadastrar Pessoa\n" +
+                "6 - Exibir Pessoas Cadastradas\n" +
+                "7 - Iniciar Tarefa\n" +
+                "8 - Finalizar Tarefa\n" +
+                "9 - Sair\n\n" +
                 "Digite um número para iniciar umas das ações listadas acima: "
             );
 
-            int.TryParse(Console.ReadLine(), out opcaoSelecionada);
+            opcaoSelecionada = InputInt();
+            Console.Write(opcaoSelecionada);
             PularLinhaConsole();
 
             if (opcaoSelecionada == 0)
@@ -52,28 +53,28 @@ class Program
             }
             if (opcaoSelecionada == 1)
             {
-                ListaTarefas novaListaT = CriarListaTarefas();
+                ListaTarefas novaListaT = MenuOpcoes.CriarListaTarefas();
                 listaListaTarefas.Add(novaListaT);
                 LimparConsole();
                 Console.WriteLine("Lista de Tarefas criada com sucesso!");
                 PularLinhaConsole();
-                ExibirListaTarefas(listaListaTarefas);
+                MenuOpcoes.ExibirListaTarefas(listaListaTarefas);
                 PularLinhaConsole();
                 continue;
             }
             if (opcaoSelecionada == 2)
             {
                 LimparConsole();
-                ExibirListaTarefas(listaListaTarefas);
+                MenuOpcoes.ExibirListaTarefas(listaListaTarefas);
                 PularLinhaConsole();
                 continue;
             }
             if (opcaoSelecionada == 3)
             {
                 LimparConsole();
-                ExibirListaTarefas(listaListaTarefas);
-                int indexSelecionado = SelecionarListaTarefa(listaListaTarefas.Count) - 1;
-                Tarefa novaTarefa = SolicitarTarefa(solicitantes);
+                MenuOpcoes.ExibirListaTarefas(listaListaTarefas);
+                int indexSelecionado = MenuOpcoes.SelecionarItem(listaListaTarefas.Count, "Informe para qual lista a tarefa está sendo solicitada: ");
+                Tarefa novaTarefa = MenuOpcoes.SolicitarTarefa(solicitantes);
                 listaListaTarefas[indexSelecionado].AddTarefa(novaTarefa);
                 PularLinhaConsole();
                 continue;
@@ -81,102 +82,69 @@ class Program
             if (opcaoSelecionada == 4)
             {
                 LimparConsole();
-                for (int index = 0; index < listaListaTarefas.Count; index++)
+                foreach (ListaTarefas listaTarefa in listaListaTarefas)
                 {
                     PularLinhaConsole();
-                    ExibirTarefas(listaListaTarefas[index].Titulo, listaListaTarefas[index].GetTarefas);
-
+                    MenuOpcoes.ExibirTarefas(listaTarefa.GetTarefas, listaTarefa.Titulo);
                 }
+                continue;
+            }
+            if (opcaoSelecionada == 5)
+            {
+                Pessoa pessoa = MenuOpcoes.CadastrarPessoa();
+                if (pessoa is Solicitante)
+                {
+                    solicitantes.Add(pessoa as Solicitante);
+                    continue;
+                }
+
+                responsaveis.Add(pessoa as Responsavel);
+                continue;
+            }
+            if (opcaoSelecionada == 6)
+            {
+                MenuOpcoes.ExibirPessoas(responsaveis);
+                MenuOpcoes.ExibirPessoas(solicitantes);
+                continue;
+            }
+            if (opcaoSelecionada == 7)
+            {
+                MenuOpcoes.ExibirListaTarefas(listaListaTarefas);
+                int indexLT = MenuOpcoes.SelecionarItem(listaListaTarefas.Count, "Informe de qual lista a tarefa será iniciada: ");
+                MenuOpcoes.ExibirTarefas(listaListaTarefas[indexLT].getTarefasSemResponsavel(), listaListaTarefas[indexLT].Titulo);
+                int indexTarefa = MenuOpcoes.SelecionarItem(listaListaTarefas[indexLT].getTarefasSemResponsavel().Count, "Selecione uma das tarefas: ");
+                MenuOpcoes.ExibirPessoas(responsaveis);
+                int indexResponsavel = MenuOpcoes.SelecionarItem(responsaveis.Count, "Selecione um responsável");
+                responsaveis[indexResponsavel].IniciarTarefa(listaListaTarefas[indexLT].GetTarefas[indexTarefa]);
+                continue;
+            }
+            if (opcaoSelecionada == 8)
+            {
+                MenuOpcoes.ExibirListaTarefas(listaListaTarefas);
+                int indexLT = MenuOpcoes.SelecionarItem(listaListaTarefas.Count, "Informe de qual lista a tarefa será finalizada: ");
+                MenuOpcoes.ExibirTarefas(listaListaTarefas[indexLT].getTarefasComResponsavel(), listaListaTarefas[indexLT].Titulo);
+                int indexTarefa = MenuOpcoes.SelecionarItem(listaListaTarefas[indexLT].getTarefasComResponsavel().Count, "Selecione uma das tarefas: ");
+                Tarefa tarefaFim = listaListaTarefas[indexLT].getTarefasComResponsavel()[indexTarefa];
+                tarefaFim = listaListaTarefas[indexLT].getTarefaBy(tarefaFim.Titulo);
+                tarefaFim.FinalizarTarefa();
                 continue;
             }
         }
 
+        ListaTarefaService.SalvarListaTarefas(listaListaTarefas);
+        PessoasService.SalvarSolicitantes(solicitantes);
+        PessoasService.SalvarResponsaveis(responsaveis);
 
-    }
-
-    /* 
-    
-    Criar menu com
-    4 - Exibir Tarefas
-    5 - Cadastrar Responsavel
-    6 - Cadastrar Solicitante
-    7 - Exibir Pessoas Cadastradas
-    8 - Iniciar Tarefa
-    9 - Finalizar Tarefa
-    8 - Sair
-    
-     */
-
-    static ListaTarefas CriarListaTarefas()
-    {
-        Console.Write("Digite o título da lista de tarefas: ");
-        string titulo = Console.ReadLine();
-        return new ListaTarefas(titulo);
-    }
-
-    static void ExibirListaTarefas(List<ListaTarefas> listaLT)
-    {
-        Console.WriteLine("--------------------------------------Listagem Lista de Tarefas--------------------------------------");
-        for (int index = 0; index < listaLT.Count; index++)
-        {
-            Console.WriteLine(index + 1 + " - " + listaLT[index].Titulo);
-        }
-        Console.WriteLine("------------------------------------Fim Listagem Lista de Tarefas------------------------------------");
-    }
-
-    static Tarefa SolicitarTarefa(List<Solicitante> solicitantes)
-    {
-        Console.WriteLine("--------------------------------------Listagem Solicitantes--------------------------------------");
-        for (int index = 0; index < solicitantes.Count; index++)
-        {
-            Console.WriteLine(index + 1 + " - " + solicitantes[index].Nome);
-        }
-        Console.WriteLine("------------------------------------Fim Listagem Solicitantes------------------------------------");
-        PularLinhaConsole();
-
-        bool infomouIdValido = false;
-        int indexSolicitanteSelecionado = 0;
-        while (!infomouIdValido)
-        {
-            Console.WriteLine("Informe o número de uma pessoa solicitante: ");
-            string input = Console.ReadLine();
-            infomouIdValido = int.TryParse(input, out indexSolicitanteSelecionado) && solicitantes.Count <= indexSolicitanteSelecionado;
-        }
-        return solicitantes[indexSolicitanteSelecionado - 1].SolicitarTarefa();
-    }
-
-    static int SelecionarListaTarefa(int qtdListaTarefa)
-    {
-        int indexLista = 0;
-        while (indexLista <= 0 || indexLista > qtdListaTarefa)
-        {
-            Console.WriteLine("informe para qual lista a tarefa está sendo solicitada: ");
-            int.TryParse(Console.ReadLine(), out indexLista);
-        }
-        return indexLista;
-    }
-
-    static void ExibirTarefas(string tituloLista, List<Tarefa> tarefas)
-    {
-        Console.WriteLine("--------------------------------------Listagem Tarefas--------------------------------------");
-        Console.WriteLine("Tarefas da lista: " + tituloLista + "\n");
-
-        if (tarefas.Count == 0) Console.Write("Lista vazia.\n");
-
-        for (int index = 0; index < tarefas.Count; index++)
-        {
-            Console.WriteLine(index + 1 + " - " + tarefas[index].Titulo);
-            Console.WriteLine("Descrição: " + tarefas[index].Descricao);
-            Console.WriteLine("Status: " + tarefas[index].GetStatus.Titulo);
-            Console.WriteLine("Solicitante: " + tarefas[index].GetSolicitante.Nome);
-            string nomeResponsavel = tarefas[index].GetResponsavel != null ? tarefas[index].GetResponsavel.Nome : "não possui";
-            Console.WriteLine("Responsável: " + nomeResponsavel);
-        }
-        Console.WriteLine("------------------------------------Fim Listagem Tarefas------------------------------------");
-        PularLinhaConsole();
     }
 
     static void PularLinhaConsole() => Console.WriteLine();
     static void LimparConsole() => Console.Clear();
 
+    static int InputInt()
+    {
+        string input = Console.ReadLine();
+        int value;
+        int.TryParse(input, out value);
+        return value;
+    }
 }

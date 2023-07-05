@@ -17,8 +17,6 @@ namespace ToDo
             {
                 throw new Exception("Uma tarefa deve conter titulo, descrição e solicitante.");
             }
-
-            // _generateRandomId();
             Titulo = titulo;
             Descricao = descricao;
             _solicitante = solicitante;
@@ -59,7 +57,7 @@ namespace ToDo
             else
                 complementoMsg = "fora do prazo.";
 
-            Console.Write("A tarefa '" + Descricao + "', solicitada no dia " + GetDataSolicitacao
+            Console.Write("A tarefa '" + Titulo + "', solicitada no dia " + GetDataSolicitacao
             + ", foi finalizada " + complementoMsg);
         }
 
@@ -68,11 +66,5 @@ namespace ToDo
             return "Título: " + Titulo + ", descrição: " + Descricao + ", solicitada em: "
             + GetDataSolicitacao + ", de status: " + _status.Titulo;
         }
-
-        /* private void _generateRandomId()
-        {
-            Random rnd = new Random();
-            _id = rnd.Next();
-        } */
     }
 }
