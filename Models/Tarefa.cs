@@ -32,6 +32,8 @@ namespace ToDo
         public string GetDataSolicitacao => _dataSolicitacao.ToShortDateString();
         public string GetDataInicio => _dataInicio.ToShortDateString();
         public string GetDataFim => _dataFim.ToShortDateString();
+        public int CalcularDiasRealizacao => _dataFim.Subtract(_dataInicio).Days;
+        public int CalcularDiasRestantes => _dataFim.Subtract(DateTime.Now).Days;
 
         public void IniciarTarefa(DateTime dataFinalizacao, Responsavel responsavel)
         {
@@ -52,16 +54,14 @@ namespace ToDo
 
             string complementoMsg;
 
-            if (this.CalcularDiasRestantes >= 0)
+            if (CalcularDiasRestantes >= 0)
                 complementoMsg = "no prazo.";
             else
                 complementoMsg = "fora do prazo.";
 
-            Console.Write("A tarefa '" + this.Descricao + "', solicitada no dia " + this.GetDataSolicitacao + ", foi finalizada " + complementoMsg);
+            Console.Write("A tarefa '" + Descricao + "', solicitada no dia " + GetDataSolicitacao
+            + ", foi finalizada " + complementoMsg);
         }
-
-        public int CalcularDiasRealizacao => _dataFim.Subtract(_dataInicio).Days;
-        public int CalcularDiasRestantes => _dataFim.Subtract(DateTime.Now).Days;
 
         public override string ToString()
         {

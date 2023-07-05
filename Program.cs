@@ -4,36 +4,6 @@ class Program
 {
     static void Main()
     {
-
-        /* Produto produto2 = new Produto(2, "Macarrão", 3.59, 1);
-        produto2.ExibirDados();
-
-        produto2.CalcularPrecoTotal();
-
-
-        Status status = StatusStatic.AFazer;
-        status.Titulo = "To do";
-        Console.Write(StatusStatic.AFazer.Titulo);
-
-        Solicitante solicitante1 = new Solicitante("Jubiscréia", "jub@gmail.com", "5542987654");
-        Tarefa t1 = new Tarefa("Infra", "Formatar PC", solicitante1);
-        t1.GetStatus(); */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         List<ListaTarefas> listaListaTarefas = new List<ListaTarefas> { };
 
         // Cria a 1º Lista de Tarefas
@@ -52,7 +22,7 @@ class Program
         // responsavel.FinalizarTarefa(t1);
 
         int opcaoSelecionada = 0;
-        while (opcaoSelecionada == 0)
+        while (opcaoSelecionada >= 0 && opcaoSelecionada < 8)
         {
             Console.Write(
                 "Sistema de Gerenciamento de Tarefas - ToDo\n\n" +
@@ -78,6 +48,12 @@ class Program
                 continue;
             }
             if (opcaoSelecionada == 2)
+            {
+                ExibirTarefas(listaListaTarefas);
+                PularLinhaConsole();
+                continue;
+            }
+            if (opcaoSelecionada == 3)
             {
 
             }
@@ -107,7 +83,11 @@ class Program
 
     static void ExibirTarefas(List<ListaTarefas> listaLT)
     {
-        // listaLT
+        listaLT.Sort();
+        for (int index = 0; index < listaLT.Count; index++)
+        {
+            Console.WriteLine(index + 1 + " - " + listaLT[index].Titulo);
+        }
     }
 
     static void PularLinhaConsole() => Console.WriteLine();

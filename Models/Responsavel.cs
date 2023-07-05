@@ -2,11 +2,10 @@ namespace ToDo
 {
     public class Responsavel : Pessoa
     {
-        // Verificar este atributo
         public ListaTarefas _historicoTarefasRealizadas;
         public Responsavel(string nome, string email, string telefone) : base(nome, email, telefone)
         {
-            _historicoTarefasRealizadas = new ListaTarefas(/* 1,  */"histórico tarefas realizadas do(a) " + nome);
+            _historicoTarefasRealizadas = new ListaTarefas("histórico tarefas realizadas do(a) " + nome);
         }
 
         public void IniciarTarefa(Tarefa tarefa)
@@ -27,7 +26,7 @@ namespace ToDo
         {
             if (tarefa.GetResponsavel != this)
             {
-                throw new Exception("Esta tarefa não corresponde a pessoa: " + base.Nome);
+                throw new Exception("Esta tarefa não corresponde a(o) responsável: " + base.Nome);
             }
             tarefa.FinalizarTarefa();
             _historicoTarefasRealizadas.AddTarefa(tarefa);
@@ -37,8 +36,8 @@ namespace ToDo
         {
             foreach (var tarefa in _historicoTarefasRealizadas.GetTarefas)
             {
-                string realizadaPor = tarefa.GetResponsavel != null ? ", solicitada por: " + tarefa.GetSolicitante : "";
-                Console.WriteLine(tarefa.ToString() + realizadaPor);
+                string soliciatadaPor = tarefa.GetSolicitante != null ? ", solicitada por: " + tarefa.GetSolicitante : "";
+                Console.WriteLine(tarefa.ToString() + soliciatadaPor);
             }
         }
     }

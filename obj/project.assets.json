@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\ToDo\\ToDo.csproj",
+      "projectUniqueName": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\GitHub\\ToDo\\ToDo.csproj",
       "projectName": "ToDo",
-      "projectPath": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\ToDo\\ToDo.csproj",
+      "projectPath": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\GitHub\\ToDo\\ToDo.csproj",
       "packagesPath": "C:\\Users\\kulib\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\ToDo\\obj\\",
+      "outputPath": "C:\\Users\\kulib\\Documents\\tads_3\\projetos_c#\\GitHub\\ToDo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kulib\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -2,13 +2,11 @@ namespace ToDo
 {
     public class ListaTarefas
     {
-        // private int _id { get; }
         public string Titulo { get; set; }
         private List<Tarefa> _tarefas;
 
-        public ListaTarefas(/* int id,  */string titulo)
+        public ListaTarefas(string titulo)
         {
-            // _id = id;
             Titulo = titulo;
             _tarefas = new List<Tarefa> { };
         }
@@ -31,8 +29,9 @@ namespace ToDo
             {
                 throw new Exception("Uma tarefa só pode ser removida por um solicitante.");
             }
-            _tarefas.Remove(tarefa);
-
+            bool removida = _tarefas.Remove(tarefa);
+            if (removida) Console.WriteLine("Tarefa removida com sucesso!");
+            else Console.WriteLine("A Tarefa não pode ser removida.");
         }
 
         public Tarefa getTarefaBy(String titulo)

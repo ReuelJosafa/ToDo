@@ -21,9 +21,11 @@ namespace ToDo
 
         public override void ExibirTarefas()
         {
+            Console.WriteLine("Tarefas do(a) ");
             foreach (var tarefa in _historicoTarefasSolicitadas.GetTarefas)
             {
-                Console.WriteLine(tarefa.ToString() + ", solicitada por: " + tarefa.GetSolicitante);
+                string realizadaPor = tarefa.GetResponsavel != null ? ", realizada por: " + tarefa.GetResponsavel : "";
+                Console.WriteLine(tarefa.ToString() + ", realizada por: " + realizadaPor);
             }
         }
     }
