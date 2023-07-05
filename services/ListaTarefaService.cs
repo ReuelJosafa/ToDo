@@ -15,8 +15,6 @@ namespace ToDo
 
             if (File.Exists("listatarefas.json"))
             {
-                // JsonConvert.DefaultSettings = DefaultJsonNameTable();
-                
                 var data = File.ReadAllText("listatarefas.json");
                 return JsonConvert.DeserializeObject<List<ListaTarefas>>(File.ReadAllText("listatarefas.json"))!;
             }

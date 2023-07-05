@@ -32,7 +32,7 @@ namespace ToDo
             _historicoTarefasRealizadas.AddTarefa(tarefa);
         }
 
-        public void ExibirTarefas()
+        public virtual void ExibirTarefas()
         {
             foreach (var tarefa in _historicoTarefasRealizadas.GetTarefas)
             {

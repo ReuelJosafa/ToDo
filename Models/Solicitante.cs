@@ -20,7 +20,7 @@ namespace ToDo
             return tarefa;
         }
 
-        public void ExibirTarefas()
+        public virtual void ExibirTarefas()
         {
             Console.WriteLine("Tarefas do(a) ");
             foreach (var tarefa in _historicoTarefasSolicitadas.GetTarefas)
